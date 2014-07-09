@@ -6,12 +6,12 @@ This repository contains sample code snippets to demonstrate the basic API inter
 Usage
 =====
 
-The examples can be run with [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or [Ruby](https://www.ruby-lang.org/en/installation/).  The dependent libraries were chosen for convience only; depending on your needs any combination of http client and deserialization libraries can be leveraged.
+The examples can be run with [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html) or [Ruby](https://www.ruby-lang.org/en/installation/).  The dependent libraries were chosen for convenience only; depending on your needs any combination of http client and deserialization libraries can be leveraged.
 
 SurfWatch Analytics
 ==========
 
-[SurfWatch Analytics](https://www.surfwatchanalytics.com/) gives you the capability to answer these types of questions. Now you can understand cyber risks in complete business context so you know the potential impact on your technology infrastructure, customers, partners, supply chain, brand reputation and financial bottom line.
+[SurfWatch Analytics](https://www.surfwatchanalytics.com/) continuously collects, standardizes and analyzes cyber-related information from a wide range of sources to deliver highly relevant and timely risk intelligence. Now you can quickly grasp the latest cybersecurity trends and impact to your business.
 
 License
 =======
