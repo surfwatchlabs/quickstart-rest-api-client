@@ -1,4 +1,4 @@
-package com.surfwatchanalytics.api;
+package com.surfwatchlabs.api;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -20,22 +20,22 @@ import javax.ws.rs.core.MultivaluedMap;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 
-public class IndustryRiskScoreClient {
+public class FeedRiskScoreClient {
 
-    private static final String API_BASE_URL = "https://www.surfwatchanalytics.com:443/v2";
+    private static final String API_BASE_URL = "https://www.surfwatchlabs.com:443/api/v3";
         
     public static void main( String[] args ) {
         
         Client restClient = ClientBuilder.newClient();
         WebTarget target = restClient.target( API_BASE_URL )
-                .path( "/industryRiskScores" )
+                .path( "/feedRiskScores" )
                 .queryParam( "yesterday", "true" );
         
         MultivaluedMap<String, Object> headers = new MultivaluedHashMap<>();
         headers.add( "app_id", "your_app_id" );
         headers.add( "app_key", "your_app_key" );
 
-        System.out.println( "Request : GET, url : " + API_BASE_URL + "/industryRiskScores" );
+        System.out.println( "Request : GET, url : " + API_BASE_URL + "/feedRiskScores" );
         String response = target
                 .request( MediaType.APPLICATION_JSON )  // alternately set "Content-Type" header
                 .headers( headers )
@@ -52,20 +52,20 @@ public class IndustryRiskScoreClient {
         gb.registerTypeAdapter( DateTime.class, new DateTimeDeserializer() );
         Gson gson = gb.create();
         
-        List<IndustryRiskScore> scores = gson.fromJson( response, new TypeToken<List<IndustryRiskScore>>(){}.getType() );
-        System.out.println( "Found " + scores.size() + " industry risk scores from yesterday." );
+        List<FeedRiskScore> scores = gson.fromJson( response, new TypeToken<List<FeedRiskScore>>(){}.getType() );
+        System.out.println( "Found " + scores.size() + " feed risk scores from yesterday." );
         
         // do something useful with result
-        for( IndustryRiskScore irs : scores ) {
-            if( irs.getIndustryRisk() > 50 ) {
+        for( FeedRiskScore frs : scores ) {
+            if( frs.getFeedRisk() > 50 ) {
                 StringBuilder sb = new StringBuilder();
                 sb.append( "Found a risk score over 50 : " );
-                sb.append( "industry=" );
-                sb.append( irs.getIndustryDescription() );
+                sb.append( "feed=" );
+                sb.append( frs.getFeedDescription() );
                 sb.append( ", riskScore=" );
-                sb.append( irs.getIndustryRisk() );
+                sb.append( frs.getFeedRisk() );
                 sb.append( ", analyticDay=" );
-                sb.append( irs.getAnalyticDay() );
+                sb.append( frs.getAnalyticDay() );
                 System.out.println( sb.toString() );
             }
         }
@@ -73,20 +73,20 @@ public class IndustryRiskScoreClient {
         System.out.println( "Well that was fun!" );
     }
 
-    class IndustryRiskScore {
+    class FeedRiskScore {
         
         // most fields omitted for brevity
         @SerializedName( "analytic_day" )
         private DateTime analyticDay;
 
-        @SerializedName( "industry_id" )
-        private Integer industryId;
+        @SerializedName( "feed_id" )
+        private Integer feedId;
 
-        @SerializedName( "industry_description" )
-        private String industryDescription;
+        @SerializedName( "feed_description" )
+        private String feedDescription;
 
-        @SerializedName( "industry_risk" )
-        private Float industryRisk;
+        @SerializedName( "feed_risk" )
+        private Float feedRisk;
 
         public DateTime getAnalyticDay() {
             return analyticDay;
@@ -96,28 +96,28 @@ public class IndustryRiskScoreClient {
             this.analyticDay = analyticDay;
         }
 
-        public Integer getIndustryId() {
-            return industryId;
+        public Integer getFeedId() {
+            return feedId;
         }
 
-        public void setIndustryId(Integer industryId) {
-            this.industryId = industryId;
+        public void setFeedId(Integer feedId) {
+            this.feedId = feedId;
         }
 
-        public String getIndustryDescription() {
-            return industryDescription;
+        public String getFeedDescription() {
+            return feedDescription;
         }
 
-        public void setIndustryDescription(String industryDescription) {
-            this.industryDescription = industryDescription;
+        public void setFeedDescription(String feedDescription) {
+            this.feedDescription = feedDescription;
         }
 
-        public Float getIndustryRisk() {
-            return industryRisk;
+        public Float getFeedRisk() {
+            return feedRisk;
         }
 
-        public void setIndustryRisk(Float industryRisk) {
-            this.industryRisk = industryRisk;
+        public void setFeedRisk(Float feedRisk) {
+            this.feedRisk = feedRisk;
         }
 
     }
